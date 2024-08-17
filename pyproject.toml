@@ -3,10 +3,12 @@ name = "flask-test-project"
 version = "0.1.0"
 description = ""
 authors = ["Segoletca <sergey.noskov.2001@mail.ru>"]
+package-mode = false
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+flask = "^3.0.3"
 
 
 [build-system]
