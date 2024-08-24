@@ -15,3 +15,6 @@
   - `hx-swap="outerHTML"`
   - `hx-trigger="mouseenter"`
   - `hx-trigger="click[shiftKey]"`
+
+Этап 4:
+- Кликер на htmx
