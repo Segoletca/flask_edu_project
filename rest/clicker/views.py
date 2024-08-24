@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request
 
+from utils.helpers import is_background_request
 from .crud import Clicker
 
 clicker_app = Blueprint("clicker_app", __name__, )
@@ -17,4 +18,11 @@ def show_clicker_page():
 @app.post("/", endpoint="do-click")
 def handle_click():
     clicker.inc_count()
-    return render_template("clicker/index.html", count=clicker.count)
+    template_name = "clicker/index.html"
+    if is_background_request():
+        template_name = "clicker/components/click_count.html"
+
+    return render_template(
+            template_name,
+            count=clicker.count,
+        )
