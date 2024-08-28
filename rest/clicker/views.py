@@ -12,7 +12,12 @@ clicker = Clicker()
 
 @app.get("/", endpoint="index")
 def show_clicker_page():
-    return render_template("clicker/index.html", count=clicker.count)
+
+    template_name = "clicker/index.html"
+    if is_background_request():
+        template_name = "clicker/components/clicker_body.html"
+
+    return render_template(template_name, count=clicker.count)
 
 
 @app.post("/", endpoint="do-click")
