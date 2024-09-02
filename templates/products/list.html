@@ -1,0 +1,15 @@
+{% extends 'products/base.html' %}
+
+{% block title %}
+    Products
+{% endblock title %}
+
+{% block body %}
+    <h2>Products</h2>
+
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }} ${{ product.price }}</li>
+        {% endfor %}
+    </ul>
+{% endblock body %}

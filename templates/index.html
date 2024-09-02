@@ -9,6 +9,10 @@
     Examples
   </a></h2>
 
+  <h3><a href="{{ url_for('products_app.list') }}">
+    Products app
+  </a></h3>
+
   <span
     hx-trigger="load"
     hx-get="{{ url_for('clicker_app.index') }}"
@@ -19,4 +23,5 @@
   <h4><a href="{{ url_for('clicker_app.index') }}">
     Clicker
   </a></h4>
+
 {% endblock body %}
