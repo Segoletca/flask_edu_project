@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, url_for, redirect
+from werkzeug.exceptions import BadRequest
 
 from .crud import products_storage
+
 
 products_app = Blueprint(
     "products_app",
@@ -23,17 +25,14 @@ def get_products_list():
 def create_product():
     product_name = request.form.get("product-name", "").strip()
     product_price = request.form.get("product-price", "").strip()
-
     # if product_price.isdigit()
-    product = products_storage.add(
-        product_name=product_name,
-        product_price=int(product_price),
-    )
-    # products = products_storage.get_list()
-    #
-    # return render_template(
-    #     "products/list.html",
-    #     products=products,
-    # )
-    url = url_for("products_app.list")
-    return redirect(url)
+    if product_name not in products_storage.check_names():
+        product = products_storage.add(
+                product_name=product_name,
+                product_price=int(product_price),
+            )
+
+    products = products_storage.get_list()
+    return render_template("products/components/items-list.html",
+                           products=products,
+                           )

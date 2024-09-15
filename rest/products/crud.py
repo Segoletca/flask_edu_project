@@ -30,6 +30,10 @@ class ProductsStorage:
     def get_list(self) -> list[Product]:
         return list(self.products.values())
 
+    def check_names(self) -> list[str]:
+        product_names = [product.name for product in self.products.values()]
+        return product_names
+
 
 products_storage = ProductsStorage()
 
