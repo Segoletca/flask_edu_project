@@ -33,6 +33,6 @@ def create_product():
         )
 
     return render_template(
-        "products/components/item.html",
+        "products/components/item-oob.html",
         product=product,
     )
