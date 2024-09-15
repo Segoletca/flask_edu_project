@@ -28,11 +28,11 @@ def create_product():
     # if product_price.isdigit()
     if product_name not in products_storage.check_names():
         product = products_storage.add(
-                product_name=product_name,
-                product_price=int(product_price),
-            )
+            product_name=product_name,
+            product_price=int(product_price),
+        )
 
-    products = products_storage.get_list()
-    return render_template("products/components/items-list.html",
-                           products=products,
-                           )
+    return render_template(
+        "products/components/item.html",
+        product=product,
+    )
