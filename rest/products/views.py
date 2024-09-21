@@ -44,6 +44,6 @@ def create_product():
         )
 
     return render_template(
-        "products/components/item-oob.html",
+        "products/components/form-and-item-oob.html",
         product=product,
     )
