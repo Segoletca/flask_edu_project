@@ -30,10 +30,12 @@ def create_product():
     form = ProductForm()
     if not form.validate_on_submit():
         response = Response(
-            render_template("products/components/form.html",
-                            form=form,
-                            ),
-            status=HTTPStatus.UNPROCESSABLE_ENTITY,)
+            render_template(
+                "products/components/form.html",
+                form=form,
+            ),
+            status=HTTPStatus.UNPROCESSABLE_ENTITY,
+        )
         raise HTTPException(response=response)
 
     product = products_storage.add(
@@ -46,3 +48,9 @@ def create_product():
         product=product,
         form=ProductForm(formdata=None),
     )
+
+
+@app.delete("/<int:product_id>", endpoint="delete")
+def delete_product(product_id: int):
+    products_storage.delete(product_id)
+    return Response(status=HTTPStatus.NO_CONTENT)

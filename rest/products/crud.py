@@ -31,6 +31,9 @@ class ProductsStorage:
         self.products[product.id] = product
         return product
 
+    def delete(self, product_id: int) -> None:
+        self.products.pop(product_id, None)
+
     def get_list(self) -> list[Product]:
         return list(self.products.values())
 
