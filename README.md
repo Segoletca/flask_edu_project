@@ -45,4 +45,7 @@
 - CSRF exempt
 
 Этап 11:
-- Удаление товара и выбор по ближайшему: `hx-target="closest li"`
+- Удаление товара 
+- Выбор цели:
+  - по ближайшему тегу: `hx-target="closest li"`
+  - по ближайшему классу: `hx-target="closest .product-item"`
