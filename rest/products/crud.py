@@ -18,6 +18,10 @@ class ProductsStorage:
         self.last_id += 1
         return self.last_id
 
+    @property
+    def names(self) -> set[str]:
+        return {product.name for product in self.products.values()}
+
     def add(self, product_name: str, product_price: int) -> Product:
         product = Product(
             id=self.next_id,
@@ -33,6 +37,9 @@ class ProductsStorage:
     def check_names(self) -> list[str]:
         product_names = [product.name for product in self.products.values()]
         return product_names
+
+    def name_exists(self, product_name: str) -> bool:
+        return product_name in self.names
 
 
 products_storage = ProductsStorage()
