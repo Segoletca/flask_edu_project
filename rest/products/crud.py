@@ -1,3 +1,5 @@
+import random
+import string
 from dataclasses import dataclass, field
 
 
@@ -61,17 +63,26 @@ class ProductsStorage:
 
 products_storage = ProductsStorage()
 
-products_storage.add(
-    "Laptop",
-    1299,
-)
+# products_storage.add(
+#     "Laptop",
+#     1299,
+# )
+#
+# products_storage.add(
+#     "Desktop",
+#     1999,
+# )
+#
+# products_storage.add(
+#     "Smartphone",
+#     999,
+# )
 
-products_storage.add(
-    "Desktop",
-    1999,
-)
-
-products_storage.add(
-    "Smartphone",
-    999,
-)
+for idx in range(1, 61):
+    random_suffix = "".join(random.choices(string.ascii_letters, k=4))
+    product_name = f"product-{idx:03d} {random_suffix}"
+    product_price = random.randint(1, 9) * random.choice([10, 50, 100, 200, 500])
+    products_storage.add(
+        product_name=product_name,
+        product_price=product_price,
+    )
