@@ -58,7 +58,7 @@ def get_product(product_id: int):
     raise NotFound(f"Product with id {product_id} does not exist!")
 
 
-@app.get("/<int:product_id>", endpoint="details")
+@app.get("/<int:product_id>/", endpoint="details")
 def get_product_details(product_id: int):
     product = get_product(product_id)
 
@@ -69,7 +69,7 @@ def get_product_details(product_id: int):
     )
 
 
-@app.put("/<int:product_id>", endpoint="update")
+@app.put("/<int:product_id>/", endpoint="update")
 def update_product(product_id: int):
     product = get_product(product_id)
     form = ProductForm()
@@ -96,10 +96,14 @@ def update_product(product_id: int):
     )
 
 
-@app.delete("/<int:product_id>", endpoint="delete")
+@app.delete("/<int:product_id>/", endpoint="delete")
 def delete_product(product_id: int):
     d = {}
     for i in range(7_00):
         d[i] = i**i
     products_storage.delete(product_id)
-    return Response(status=HTTPStatus.NO_CONTENT)
+    if not request.args.get("redirect"):
+        return Response(status=HTTPStatus.NO_CONTENT)
+
+    url = url_for("products_app.list")
+    return redirect(url, code=HTTPStatus.SEE_OTHER)
