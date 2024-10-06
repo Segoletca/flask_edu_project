@@ -49,3 +49,6 @@
 - Выбор цели:
   - по ближайшему тегу: `hx-target="closest li"`
   - по ближайшему классу: `hx-target="closest .product-item"`
+- Анимации:
+  - Загрузка `.htmx-request`
+  - Замена `htmx-swapping`
