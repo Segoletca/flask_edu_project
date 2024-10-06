@@ -22,6 +22,9 @@ class ProductsStorage:
     def names(self) -> set[str]:
         return {product.name for product in self.products.values()}
 
+    def get_by_id(self, product_id: int) -> Product | None:
+        return self.products.get(product_id)
+
     def add(self, product_name: str, product_price: int) -> Product:
         product = Product(
             id=self.next_id,
@@ -29,6 +32,17 @@ class ProductsStorage:
             price=product_price,
         )
         self.products[product.id] = product
+        return product
+
+    def update(
+        self,
+        product_id: int,
+        product_name: str,
+        product_price: int,
+    ) -> Product:
+        product = self.products[product_id]
+        product.name = product_name
+        product.price = product_price
         return product
 
     def delete(self, product_id: int) -> None:
