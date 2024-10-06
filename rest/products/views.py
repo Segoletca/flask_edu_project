@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from http import HTTPStatus
 
 from flask import Blueprint, render_template, request, url_for, redirect, Response
@@ -64,6 +65,34 @@ def get_product_details(product_id: int):
     return render_template(
         "products/details.html",
         product=product,
+        form=ProductForm(data=asdict(product)),
+    )
+
+
+@app.put("/<int:product_id>", endpoint="update")
+def update_product(product_id: int):
+    product = get_product(product_id)
+    form = ProductForm()
+    if not form.validate_on_submit():
+        response = Response(
+            render_template(
+                "products/components/form-update.html",
+                product=product,
+                form=form,
+            ),
+            status=HTTPStatus.UNPROCESSABLE_ENTITY,
+        )
+        raise HTTPException(response=response)
+
+    products_storage.update(
+        product_id=product.id,
+        product_name=form.name.data,
+        product_price=form.price.data,
+    )
+    return render_template(
+        "products/components/form-update.html",
+        product=product,
+        form=form,
     )
 
 
